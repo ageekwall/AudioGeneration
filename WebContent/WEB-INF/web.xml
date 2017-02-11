@@ -3,10 +3,29 @@
   <display-name>AudioGenerator</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <param-name>file-upload</param-name>
+    <param-value>D:\Softwares\apache-tomcat-7.0.70-windows-x64\apache-tomcat-7.0.70\webapps</param-value>
+  </context-param>
+  <servlet>
+    <description></description>
+    <display-name>UploadDownloadFileServlet</display-name>
+    <servlet-name>UploadDownloadFileServlet</servlet-name>
+    <servlet-class>UploadDownloadFileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadDownloadFileServlet</servlet-name>
+    <url-pattern>/UploadDownloadFileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Download</display-name>
+    <servlet-name>Download</servlet-name>
+    <servlet-class>Download</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Download</servlet-name>
+    <url-pattern>/Download</url-pattern>
+  </servlet-mapping>
 </web-app>
