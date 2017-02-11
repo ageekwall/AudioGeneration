@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.Iterator;
 import java.util.List;
 
@@ -92,9 +94,23 @@ public class UploadDownloadFileServlet extends HttpServlet {
 	            }
 	            fi.write( file ) ;
 	            out.println("Uploaded Filename: " + fileName + "<br>");
-	            request.setAttribute("onlyFileName", fileName.substring(fileName.lastIndexOf("\\")+1));
-	            request.setAttribute("fileName",fileName);
-	            RequestDispatcher rd = request.getRequestDispatcher("Download");
+	            String onlyFileName= fileName.substring(fileName.lastIndexOf("\\")+1);
+	            //request.setAttribute("onlyFileName", fileName.substring(fileName.lastIndexOf("\\")+1));
+	            //request.setAttribute("fileName",fileName);
+	            onlyFileName="D:/Softwares/apache-tomcat-7.0.70-windows-x64/apache-tomcat-7.0.70/webapps/"+onlyFileName;
+	    		BufferedReader br = new BufferedReader(new FileReader(onlyFileName));
+	    		String line= null, completeLine = "";
+	    		line = br.readLine();
+	    		while(line !=null) {
+	    			completeLine += line;
+	    			line = br.readLine();
+	    			//System.out.println(line);
+	    			
+	    		}
+	    		
+	    		br.close();
+	    		request.setAttribute("completeLine", completeLine);
+	            RequestDispatcher rd = request.getRequestDispatcher("AudioConverter");
 	            rd.forward(request, response);
 	         }
 	      }

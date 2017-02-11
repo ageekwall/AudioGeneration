@@ -20,6 +20,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>AudioConverter</display-name>
+    <servlet-name>AudioConverter</servlet-name>
+    <servlet-class>AudioConverter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AudioConverter</servlet-name>
+    <url-pattern>/AudioConverter</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>Download</display-name>
     <servlet-name>Download</servlet-name>
     <servlet-class>Download</servlet-class>
