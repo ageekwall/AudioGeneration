@@ -1,11 +1,9 @@
-
-
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -30,40 +28,39 @@ public class Download extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("resource")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		  //File mp3 = new File("E:/voice.mp3");
 		 // FileOutputStream mp3 = new FileOutputStream("D:/Softwares/apache-tomcat-7.0.70-windows-x64/apache-tomcat-7.0.70/webapps/voice.mp3");
-		String filename =   "D:/Softwares/apache-tomcat-7.0.70-windows-x64/apache-tomcat-7.0.70/webapps/voice.mp3";
-		ServletOutputStream stream = null;
-		  BufferedInputStream buf = null;
-		  try {
-		    stream = response.getOutputStream();
-		  //  File mp3 = new File("/myCollectionOfSongs" + "/" + fileName);
-		    
-		    //set response headers
-		    response.setContentType("audio/mpeg"); 
-		    String fileName="voice11.mp3";
-
-		    response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
-
-		    //response.setContentLength((int) mp3.length());
-
-		    FileInputStream input = new FileInputStream(filename);
-		    buf = new BufferedInputStream(input);
-		    int readBytes = 0;
-		    //read from the file; write to the ServletOutputStream
-		    while ((readBytes = buf.read()) != -1)
-		      stream.write(readBytes);
-		  } catch (IOException ioe) {
-		    throw new ServletException(ioe.getMessage());
-		  } finally {
-		    if (stream != null)
-		      stream.close();
-		    if (buf != null)
-		      buf.close();
-		  }
-
+		String location= (String)request.getAttribute("location");
+		String path = "C:/Users/garima/Downloads/apache-tomcat-7.0.37/webapps/";
+		String filename = "voice.mp3";
+		String outFile = location + ".mp3";
+		File file = new File(path + filename);
+		response.setContentType("audio/mpeg");
+		response.addHeader("Content-Disposition", "attachment; filename=" +filename);
+		response.setContentLength((int) file.length());
+		//ServletOutputStream servletOutputStream = response.getOutputStream();
+		BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+		BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(outFile));
+		int ch =0;
+		while((ch=bufferedInputStream.read()) != -1){
+			bufferedOutputStream.write(ch);
+		}
+		bufferedInputStream.close();
+		bufferedOutputStream.close();
+		/*int byteRead = bufferedInputStream.read();
+		System.out.println(byteRead);
+		while(byteRead != -1){
+			System.out.println(byteRead);
+			servletOutputStream.write(byteRead);
+			byteRead = bufferedInputStream.read();
+		}
+		if(servletOutputStream != null) servletOutputStream.close();
+		if(bufferedInputStream != null) bufferedInputStream.close();*/
+		
+		
 }
 }

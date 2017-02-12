@@ -38,22 +38,18 @@ public class AudioConverter extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.setContentType("text/html");  
-		//PrintWriter out = response.getWriter();  
-		String completeLine= (String)request.getAttribute("completeLine");
-		//filename="D:/Softwares/apache-tomcat-7.0.70-windows-x64/apache-tomcat-7.0.70/webapps/"+filename;
-		/*BufferedReader br = new BufferedReader(new FileReader(filename));
-		String line= null, completeLine = null;
-		while((line = br.readLine()) !=null) {
-			completeLine += line;
-			
-			
-		}
-		//System.out.println(completeLine);
-		*/
-		//br.close();
-		//response.setContentType("audio/MPEG");   
+		doGet(request, response);
+	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		String completeLine= (String)request.getAttribute("completeLine");
+		String location= (String)request.getAttribute("location");
+		
 		  VoiceProvider tts = new VoiceProvider("9464f6c534144da391fd59bbb7f1ca73");
 			
 	        VoiceParameters params = new VoiceParameters(completeLine, Languages.English_UnitedStates);
@@ -73,9 +69,9 @@ public class AudioConverter extends HttpServlet {
 			
 			//response.setContentType("APPLICATION/OCTET-STREAM");   
 			//response.setHeader("Content-Disposition","attachment; filename=\"" + voice + "\"");
-			File mp3 = new File("D:/Softwares/apache-tomcat-7.0.70-windows-x64/apache-tomcat-7.0.70/webapps/voice.mp3");
+			File mp3 = new File("C:/Users/garima/Downloads/apache-tomcat-7.0.37/webapps/voice.mp3");
 			
-			String filename = "D:/Softwares/apache-tomcat-7.0.70-windows-x64/apache-tomcat-7.0.70/webapps/voice.mp3";
+			String filename = "C:/Users/garima/Downloads/apache-tomcat-7.0.37/webapps/voice.mp3";
 			/*response.addHeader("Content-Disposition","attachment; filename=" + "voice.mp3" );   
 			*/
 			FileOutputStream fos = new FileOutputStream(filename);
@@ -83,19 +79,9 @@ public class AudioConverter extends HttpServlet {
 	        fos.flush();
 	        fos.close();
 	        
+	        request.setAttribute("location", location);
 	        RequestDispatcher rd = request.getRequestDispatcher("Download");
 	        rd.forward(request, response);
-	        
-	       //response.add
-			
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

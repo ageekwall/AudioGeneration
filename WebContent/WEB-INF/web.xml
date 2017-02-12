@@ -6,7 +6,7 @@
   </welcome-file-list>
   <context-param>
     <param-name>file-upload</param-name>
-    <param-value>D:\Softwares\apache-tomcat-7.0.70-windows-x64\apache-tomcat-7.0.70\webapps</param-value>
+    <param-value>C:\Users\garima\Downloads\apache-tomcat-7.0.37\webapps</param-value>
   </context-param>
   <servlet>
     <description></description>
@@ -37,5 +37,15 @@
   <servlet-mapping>
     <servlet-name>Download</servlet-name>
     <url-pattern>/Download</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PdfToTextConverter</display-name>
+    <servlet-name>PdfToTextConverter</servlet-name>
+    <servlet-class>PdfToTextConverter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PdfToTextConverter</servlet-name>
+    <url-pattern>/PdfToTextConverter</url-pattern>
   </servlet-mapping>
 </web-app>
